@@ -2,27 +2,30 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Предложения</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Доступные займы</h1>
-  <div id="result"></div>
+  <div class="container">
+    <h1>Доступные займы</h1>
+    <div id="result"></div>
+  </div>
 
   <script>
-    const amount = localStorage.getItem('loanAmount');
-    const term = localStorage.getItem('loanTerm');
+    const amount = parseInt(localStorage.getItem('loanAmount')) || 0;
 
     const offers = [
-      { name: 'МФО А', link: 'https://example.com/a', min: 1000, max: 50000 },
-      { name: 'МФО B', link: 'https://example.com/b', min: 3000, max: 70000 },
-      { name: 'МФО C', link: 'https://example.com/c', min: 500, max: 20000 },
+      { name: 'МФО А', link: 'https://example.com/a', min: 10000, max: 50000 },
+      { name: 'МФО B', link: 'https://example.com/b', min: 30000, max: 100000 },
+      { name: 'МФО C', link: 'https://example.com/c', min: 50000, max: 350000 },
     ];
 
-    const result = offers.filter(o => amount >= o.min && amount <= o.max)
-      .map(o => `<p><a href="${o.link}" target="_blank">${o.name}</a> — подходит под ваш запрос</p>`)
-      .join('');
-
-    document.getElementById('result').innerHTML = result || '<p>Нет подходящих предложений.</p>';
+    const filtered = offers.filter(o => amount >= o.min && amount <= o.max);
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = filtered.length
+      ? filtered.map(o => `<a class="offer" href="${o.link}" target="_blank">${o.name}</a>`).join('')
+      : '<p>Нет подходящих предложений</p>';
   </script>
 </body>
 </html>
