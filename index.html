@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Подбор займа</title>
+</head>
+<body>
+  <h1>Подбор займа</h1>
+  <form id="loanForm">
+    <label>Сумма: <input type="number" name="amount" required></label><br>
+    <label>Срок (дней): <input type="number" name="term" required></label><br>
+    <button type="submit">Получить</button>
+  </form>
+
+  <script>
+    document.getElementById('loanForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const amount = this.amount.value;
+      const term = this.term.value;
+      localStorage.setItem('loanAmount', amount);
+      localStorage.setItem('loanTerm', term);
+      window.location.href = 'form.html';
+    });
+  </script>
+</body>
+</html>
