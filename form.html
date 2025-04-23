@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Анкета</title>
+</head>
+<body>
+  <h1>Заполните анкету</h1>
+  <form id="userForm">
+    <label>Имя: <input type="text" name="firstName" required></label><br>
+    <label>Фамилия: <input type="text" name="lastName" required></label><br>
+    <label>Телефон: <input type="tel" name="phone" required></label><br>
+    <label>ИИН: <input type="text" name="iin" required></label><br>
+    <button type="submit">Продолжить</button>
+  </form>
+
+  <script>
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      localStorage.setItem('firstName', this.firstName.value);
+      localStorage.setItem('lastName', this.lastName.value);
+      localStorage.setItem('phone', this.phone.value);
+      localStorage.setItem('iin', this.iin.value);
+      window.location.href = 'offers.html';
+    });
+  </script>
+</body>
+</html>
