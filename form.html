@@ -19,37 +19,38 @@
     </form>
   </div>
 
-  <script>
-    function isValidPhone(phone) {
-      return /^\+7\d{10}$/.test(phone.replace(/\D/g, ''));
+<script>
+  function isValidPhone(phone) {
+    const cleaned = phone.replace(/\D/g, '');
+    return /^770\d{8}$/.test(cleaned);
+  }
+
+  function isValidIIN(iin) {
+    return /^\d{12}$/.test(iin);
+  }
+
+  document.getElementById('userForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const phone = this.phone.value.replace(/\D/g, '');
+    const iin = this.iin.value;
+    const error = document.getElementById('error');
+
+    if (!isValidPhone(phone)) {
+      error.textContent = "Введите корректный казахстанский номер (например: +77054426854)";
+      return;
     }
 
-    function isValidIIN(iin) {
-      return /^\d{12}$/.test(iin);
+    if (!isValidIIN(iin)) {
+      error.textContent = "ИИН должен содержать 12 цифр";
+      return;
     }
 
-    document.getElementById('userForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const phone = this.phone.value.replace(/\D/g, '');
-      const iin = this.iin.value;
-      const error = document.getElementById('error');
-
-      if (!isValidPhone(phone)) {
-        error.textContent = "Введите корректный казахстанский номер (+7XXXXXXXXXX)";
-        return;
-      }
-
-      if (!isValidIIN(iin)) {
-        error.textContent = "ИИН должен содержать 12 цифр";
-        return;
-      }
-
-      localStorage.setItem('firstName', this.firstName.value);
-      localStorage.setItem('lastName', this.lastName.value);
-      localStorage.setItem('phone', phone);
-      localStorage.setItem('iin', iin);
-      window.location.href = 'offers.html';
-    });
-  </script>
+    localStorage.setItem('firstName', this.firstName.value);
+    localStorage.setItem('lastName', this.lastName.value);
+    localStorage.setItem('phone', phone);
+    localStorage.setItem('iin', iin);
+    window.location.href = 'offers.html';
+  });
+</script>
 </body>
 </html>
