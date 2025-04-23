@@ -6,25 +6,48 @@
   <title>Анкета</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="container">
+<body class="bg">
+  <div class="container glass">
     <h1>Заполните анкету</h1>
     <form id="userForm">
       <input type="text" name="firstName" placeholder="Имя" required>
       <input type="text" name="lastName" placeholder="Фамилия" required>
-      <input type="tel" name="phone" placeholder="Телефон" required>
-      <input type="text" name="iin" placeholder="ИИН" required>
+      <input type="tel" name="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
+      <input type="text" name="iin" placeholder="ИИН (12 цифр)" required>
       <button type="submit">Продолжить</button>
+      <p id="error" class="error"></p>
     </form>
   </div>
 
   <script>
+    function isValidPhone(phone) {
+      return /^\+7\d{10}$/.test(phone.replace(/\D/g, ''));
+    }
+
+    function isValidIIN(iin) {
+      return /^\d{12}$/.test(iin);
+    }
+
     document.getElementById('userForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      const phone = this.phone.value.replace(/\D/g, '');
+      const iin = this.iin.value;
+      const error = document.getElementById('error');
+
+      if (!isValidPhone(phone)) {
+        error.textContent = "Введите корректный казахстанский номер (+7XXXXXXXXXX)";
+        return;
+      }
+
+      if (!isValidIIN(iin)) {
+        error.textContent = "ИИН должен содержать 12 цифр";
+        return;
+      }
+
       localStorage.setItem('firstName', this.firstName.value);
       localStorage.setItem('lastName', this.lastName.value);
-      localStorage.setItem('phone', this.phone.value);
-      localStorage.setItem('iin', this.iin.value);
+      localStorage.setItem('phone', phone);
+      localStorage.setItem('iin', iin);
       window.location.href = 'offers.html';
     });
   </script>
