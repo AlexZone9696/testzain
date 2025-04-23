@@ -2,17 +2,21 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Анкета</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Заполните анкету</h1>
-  <form id="userForm">
-    <label>Имя: <input type="text" name="firstName" required></label><br>
-    <label>Фамилия: <input type="text" name="lastName" required></label><br>
-    <label>Телефон: <input type="tel" name="phone" required></label><br>
-    <label>ИИН: <input type="text" name="iin" required></label><br>
-    <button type="submit">Продолжить</button>
-  </form>
+  <div class="container">
+    <h1>Заполните анкету</h1>
+    <form id="userForm">
+      <input type="text" name="firstName" placeholder="Имя" required>
+      <input type="text" name="lastName" placeholder="Фамилия" required>
+      <input type="tel" name="phone" placeholder="Телефон" required>
+      <input type="text" name="iin" placeholder="ИИН" required>
+      <button type="submit">Продолжить</button>
+    </form>
+  </div>
 
   <script>
     document.getElementById('userForm').addEventListener('submit', function(e) {
