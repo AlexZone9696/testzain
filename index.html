@@ -6,6 +6,52 @@
   <title>Подбор займа</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<body class="bg">
+  <div class="container glass">
+    <img src="images/logo.png" alt="Логотип" class="logo">
+    <h1>Подбор займа</h1>
+    <img src="images/loan.png" class="illustration">
+    <form id="loanForm">
+      <label>Сумма: <span id="amountDisplay">10000₸</span></label>
+      <input type="range" id="amount" min="10000" max="350000" step="1000" value="10000">
+
+      <label>Срок: <span id="termDisplay">30 дней</span></label>
+      <input type="range" id="term" min="5" max="90" step="5" value="30">
+
+      <button type="submit">Продолжить</button>
+    </form>
+  </div>
+
+  <script>
+    const amountRange = document.getElementById('amount');
+    const termRange = document.getElementById('term');
+    const amountDisplay = document.getElementById('amountDisplay');
+    const termDisplay = document.getElementById('termDisplay');
+
+    amountRange.addEventListener('input', () => {
+      amountDisplay.textContent = `${amountRange.value}₸`;
+    });
+
+    termRange.addEventListener('input', () => {
+      termDisplay.textContent = `${termRange.value} дней`;
+    });
+
+    document.getElementById('loanForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      localStorage.setItem('loanAmount', amountRange.value);
+      localStorage.setItem('loanTerm', termRange.value);
+      window.location.href = 'form.html';
+    });
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Подбор займа</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
   <div class="container">
     <h1>Подбор займа</h1>
